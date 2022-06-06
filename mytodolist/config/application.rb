@@ -2,6 +2,8 @@ require_relative "boot"
 
 require "rails/all"
 
+require_relative '../lib/middleware/app_proxy'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -23,5 +25,7 @@ module Mytodolist
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.middleware.use ::AppProxy
   end
 end
